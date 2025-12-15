@@ -66,6 +66,18 @@ class FrankaAioDoraRobotConfig(RobotConfig):
                 height=480,
             ),
 
+            "image_zed_left": OpenCVCameraConfig(
+                index_or_path=3,
+                fps=30,
+                width=640,
+                height=480,
+            ),
+            "image_zed_right": OpenCVCameraConfig(
+                index_or_path=4,
+                fps=30,
+                width=640,
+                height=480,
+            ),
         }
     )
 
