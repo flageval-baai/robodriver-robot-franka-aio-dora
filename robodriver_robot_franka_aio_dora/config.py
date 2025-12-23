@@ -53,27 +53,39 @@ class FrankaAioDoraRobotConfig(RobotConfig):
 
     cameras: Dict[str, CameraConfig] = field(
         default_factory=lambda: {
-            "image_wrist": OpenCVCameraConfig(
+
+            "image_wrist_left": OpenCVCameraConfig(
                 index_or_path=1,
                 fps=30,
                 width=640,
                 height=480,
             ),
-            "image_wrist_depth": OpenCVCameraConfig(
+            "image_wrist_right": OpenCVCameraConfig(
                 index_or_path=2,
                 fps=30,
                 width=640,
                 height=480,
             ),
-
-            "image_zed_left": OpenCVCameraConfig(
+            "image_front_left": OpenCVCameraConfig(
                 index_or_path=3,
                 fps=30,
                 width=640,
                 height=480,
             ),
-            "image_zed_right": OpenCVCameraConfig(
+            "image_front_right": OpenCVCameraConfig(
                 index_or_path=4,
+                fps=30,
+                width=640,
+                height=480,
+            ),
+            "image_side_left": OpenCVCameraConfig(
+                index_or_path=5,
+                fps=30,
+                width=640,
+                height=480,
+            ),
+            "image_side_right": OpenCVCameraConfig(
+                index_or_path=6,
                 fps=30,
                 width=640,
                 height=480,

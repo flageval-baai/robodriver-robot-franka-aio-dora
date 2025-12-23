@@ -1,14 +1,5 @@
 nodes:
-  - id: camera_wrist # realsense
-    path: nodes/dora_camera_realsense.py
-    inputs:
-      tick: dora/timer/millis/33
-    outputs:
-      - image
-      - image_depth
-    env:
-      DEVICE_SERIAL: 336222071127
-  - id: camera_zed # zed
+  - id: camera_zed_wrist 
     path: nodes/dora_camera_zed.py
     inputs:
       tick: dora/timer/millis/33
@@ -16,7 +7,30 @@ nodes:
       - left_image
       - right_image
     env:
-      DEVICE_SERIAL: 111111
+      DEVICE_SERIAL: 19118752
+      CAPTURE_MODE: 1
+
+  - id: camera_zed_front 
+    path: nodes/dora_camera_zed.py
+    inputs:
+      tick: dora/timer/millis/33
+    outputs:
+      - left_image
+      - right_image
+    env:
+      # DEVICE_SERIAL: 38509476
+      DEVICE_SERIAL: 21348267
+      CAPTURE_MODE: 1
+
+  - id: camera_zed_side 
+    path: nodes/dora_camera_zed.py
+    inputs:
+      tick: dora/timer/millis/33
+    outputs:
+      - left_image
+      - right_image
+    env:
+      DEVICE_SERIAL: 38053932
       CAPTURE_MODE: 1
 
   - id: arm_franka_aio
@@ -33,10 +47,15 @@ nodes:
   - id: franka_aio_dora
     path: dynamic
     inputs:
-      image_wrist: camera_wrist/image
-      image_wrist_depth: camera_wrist/image_depth
-      image_zed_left: camera_zed/left_image
-      image_zed_right: camera_zed/right_image
+      image_wrist_left: camera_zed_wrist/left_image
+      image_wrist_right: camera_zed_wrist/right_image
+
+      image_front_left: camera_zed_front/left_image
+      image_front_right: camera_zed_front/right_image
+
+      image_side_left: camera_zed_side/left_image
+      image_side_right: camera_zed_side/right_image
+
       follower_arm_joint: arm_franka_aio/jointstate
     outputs:
       - action_joint
